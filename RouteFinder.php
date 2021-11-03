@@ -23,9 +23,9 @@ class RouteFinder
      * @param string|null $method - request method, for example `GET`
      * @param string|null $domain - HTTP HOST, if different from the current one
      *//**
-     * @param string $url - ïðîâåðÿåìûé URL âèäà `/example/url/address/`
-     * @param string|null $method - ìåòîä çàïðîñà, íàïðèìåð `GET`
-     * @param string|null $domain - HTTP HOST, åñëè îòëè÷àåòñÿ îò òåêóùåãî
+     * @param string $url - Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼Ñ‹Ð¹ URL Ð²Ð¸Ð´Ð° `/example/url/address/`
+     * @param string|null $method - Ð¼ÐµÑ‚Ð¾Ð´ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°, Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€ `GET`
+     * @param string|null $domain - HTTP HOST, ÐµÑÐ»Ð¸ Ð¾Ñ‚Ð»Ð¸Ñ‡Ð°ÐµÑ‚ÑÑ Ð¾Ñ‚ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾
      */
     public function __construct(string $url, string $method = 'GET', string $domain = null) {
         $url = $url[0] === '/' ? $url : '/' . $url;
@@ -72,7 +72,7 @@ class RouteFinder
     /**
      * @return string - template path of the requested route
      *//**
-     * @return string - øàáëîííûé ïóòü íàéäåííîãî ðîóòà
+     * @return string - ÑˆÐ°Ð±Ð»Ð¾Ð½Ð½Ñ‹Ð¹ Ð¿ÑƒÑ‚ÑŒ Ð½Ð°Ð¹Ð´ÐµÐ½Ð½Ð¾Ð³Ð¾ Ñ€Ð¾ÑƒÑ‚Ð°
      */
     public function getRoutePath() {
         return $this->currentPath;
@@ -81,7 +81,7 @@ class RouteFinder
     /**
      * @return null|int - found route identifier
      *//**
-     * @return null|int - èäåíòèôèêàòîð íàéäåííîãî ðîóòà
+     * @return null|int - Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€ Ð½Ð°Ð¹Ð´ÐµÐ½Ð½Ð¾Ð³Ð¾ Ñ€Ð¾ÑƒÑ‚Ð°
      */
     public function getRouteLabel() {
         return $this->currentLabel;
