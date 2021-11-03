@@ -19,5 +19,5 @@ if ((new RouteFinder())->check('/example/url/address/', 'GET')) {
 
 -----------------------------------
 
-[![License: MIT](https://img.shields.io/badge/License-MIT%20(Free)-brightgreen.svg)](https://github.com/phphleb/draft/blob/main/LICENSE) ![PHP](https://img.shields.io/badge/PHP-7-blue) ![PHP](https://img.shields.io/badge/PHP-8-blue) ![PHP](https://img.shields.io/badge/HLEB->=1.5.73-brightgreen)
+[![License: MIT](https://img.shields.io/badge/License-MIT%20(Free)-brightgreen.svg)](https://github.com/phphleb/draft/blob/main/LICENSE) ![PHP](https://img.shields.io/badge/PHP-7-blue) ![PHP](https://img.shields.io/badge/PHP-8-blue) ![PHP](https://img.shields.io/badge/HLEB%20Framework->=1.5.73-brightgreen)
 
