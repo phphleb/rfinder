@@ -32,20 +32,20 @@ class RouteFinder
         try {
             $routesList = (new CacheRoutes())->load();
             if (empty($routesList)) {
-                $errors[] = 'Failed to load route list';
+                $this->errors[] = 'Failed to load route list';
                 $this->checked = false;
                 return $this;
             }
 
             $block = (new URLHandler())->page($routesList, $url, $method, $domain);
             if (empty($block)) {
-                $errors[] = 'Failed to retrieve route data';
+                $this->errors[] = 'No suitable route found';
                 $this->checked = false;
                 return $this;
             }
             
         } catch (\Throwable $exception) {
-            $errors[] = 'Error thrown: ' . $exception->getMessage();
+            $this->errors[] = 'Error thrown: ' . $exception->getMessage();
             $this->checked = false;
             return $this;
         }
