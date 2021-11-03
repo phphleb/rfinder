@@ -22,9 +22,9 @@ class RouteFinder
      * @param string|null $domain - HTTP HOST, if different from the current one
      * @return bool
      *//**
-     * @param string|null $url - проверяемый URL вида `/example/url/address/`
-     * @param string|null $method - метод запроса, например `GET`
-     * @param string|null $domain - HTTP HOST, если отличается от текущего
+     * @param string|null $url - РїСЂРѕРІРµСЂСЏРµРјС‹Р№ URL РІРёРґР° `/example/url/address/`
+     * @param string|null $method - РјРµС‚РѕРґ Р·Р°РїСЂРѕСЃР°, РЅР°РїСЂРёРјРµСЂ `GET`
+     * @param string|null $domain - HTTP HOST, РµСЃР»Рё РѕС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ С‚РµРєСѓС‰РµРіРѕ
      * @return bool
      */
     public function check(string $url, string $method = null, string $domain = null) {
