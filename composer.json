@@ -1,0 +1,26 @@
+{
+  "name": "phphleb/rfinder",
+  "description": "Finding a route using an arbitrary URL for PHP Micro-Framework HLEB",
+  "type": "library",
+  "keywords": [
+    "search route",
+    "php"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Foma Tuturov",
+      "email": "fomiash@yandex.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "phphleb/framework": ">=1.5.73"
+  },
+  "autoload": {
+    "psr-4": {
+      "Phphleb\\Rfinder\\": "/"
+    }
+  },
+  "minimum-stability": "dev"
+}
