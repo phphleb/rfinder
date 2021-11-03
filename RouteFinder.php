@@ -39,7 +39,6 @@ class RouteFinder
 
             $block = (new URLHandler())->page($routesList, $url, $method, $domain);
             if (empty($block)) {
-                $this->errors[] = 'No suitable route found';
                 $this->checked = false;
                 return $this;
             }
