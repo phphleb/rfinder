@@ -11,7 +11,7 @@ Checking:
  ```php
 use Phphleb\Rfinder\RouteFinder;
 
-if ((new RouteFinder())->check('/example/url/address/', 'GET')) {
+if ((new RouteFinder('/example/url/address/', 'GET'))->isValid()) {
   // Found a match in the current routes.
 }
 
