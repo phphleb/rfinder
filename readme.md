@@ -9,11 +9,21 @@ The class `RouteFinder` is not included in the original configuration of the fra
 
 Checking:
  ```php
-use Phphleb\Rfinder\RouteFinder;
+use Phphleb\Rfinder\RadjaxRouteFinder;
+use Phphleb\Rfinder\StandardRouteFinder;
 
-if ((new RouteFinder('/example/url/address/', 'GET'))->isValid()) {
-  // Found a match in the current routes.
+$address = '/example/url/address/';
+
+// Step 1
+if ((new RadjaxRouteFinder($address))->isValid()) {
+  // Found a match in the Radjax routes.
 }
+
+// Step 2
+if ((new StandardRouteFinder($address, 'GET'))->isValid()) {
+  // Found a match in the standard routes.
+}
+
 
 ```
 

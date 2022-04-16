@@ -8,7 +8,7 @@ namespace Phphleb\Rfinder;
 use Hleb\Constructor\Cache\CacheRoutes;
 use Hleb\Constructor\Handlers\URLHandler;
 
-class RouteFinder
+class StandardRouteFinder implements RouteFinderInterface
 {
     private $errors = [];
 
