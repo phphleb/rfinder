@@ -57,7 +57,7 @@ class RadjaxRouteFinder implements RouteFinderInterface
     /**
      * @return bool
      */
-    public function isValid() {
+    public function isFound() {
         return $this->checked;
     }
 
@@ -77,6 +77,17 @@ class RadjaxRouteFinder implements RouteFinderInterface
      */
     public function getRouteLabel() {
         return $this->currentLabel;
+    }
+
+    /**
+     * Returns the combined prefix.
+     * @return string
+     *//**
+     * Возвращает объединённы префикс.
+     * @return string
+     */
+    public function getPrefix() {
+        return '';
     }
 
 }

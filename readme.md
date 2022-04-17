@@ -9,18 +9,26 @@ The class `RouteFinder` is not included in the original configuration of the fra
 
 Checking:
  ```php
+use Phphleb\Rfinder\RouteFinder;
+
+if ((new RouteFinder('/example/url/address/', 'GET'))->isFound()) {
+  // Found a match in all types of routes.
+}
+```
+Separately:
+ ```php
 use Phphleb\Rfinder\RadjaxRouteFinder;
 use Phphleb\Rfinder\StandardRouteFinder;
 
 $address = '/example/url/address/';
 
 // Step 1
-if ((new RadjaxRouteFinder($address))->isValid()) {
+if ((new RadjaxRouteFinder($address))->isFound()) {
   // Found a match in the Radjax routes.
 }
 
 // Step 2
-if ((new StandardRouteFinder($address, 'GET'))->isValid()) {
+if ((new StandardRouteFinder($address, 'GET'))->isFound()) {
   // Found a match in the standard routes.
 }
 

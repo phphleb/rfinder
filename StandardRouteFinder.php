@@ -18,6 +18,8 @@ class StandardRouteFinder implements RouteFinderInterface
 
     private $checked = false;
 
+    private $prefix = null;
+
     /**
      * @param string $url - validated url like `/example/url/address/`
      * @param string|null $method - request method, for example `GET`
@@ -65,7 +67,7 @@ class StandardRouteFinder implements RouteFinderInterface
     /**
      * @return bool
      */
-    public function isValid() {
+    public function isFound() {
         return $this->checked;
     }
 
@@ -87,15 +89,28 @@ class StandardRouteFinder implements RouteFinderInterface
         return $this->currentLabel;
     }
 
+    /**
+     * Returns the combined prefix.
+     * @return string|null
+     *//**
+     * Возвращает объединённы префикс.
+     * @return string|null
+     */
+    public function getPrefix() {
+        return $this->prefix;
+    }
+
     protected function getFullPath(array $block) {
-        $prefix = '/';
+        $prefix = '';
         foreach($block['actions'] as $action) {
             if(!empty($action['prefix'])) {
                 $prefix .= trim($action['prefix'], ' /\\') . '/';
             }
         }
 
-        return str_replace('//', '/', $prefix . trim($block['data_path'], ' /\\') . '/');
+        $this->prefix = trim($prefix, ' /\\');
+
+        return '/' . str_replace('//', '/', $prefix . trim($block['data_path'], ' /\\') . '/');
     }
 
 }

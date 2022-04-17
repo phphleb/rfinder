@@ -8,9 +8,11 @@ interface RouteFinderInterface
 {
     public function getErrors();
 
-    public function isValid();
+    public function isFound();
 
     public function getRoutePath();
 
     public function getRouteLabel();
+
+    public function getPrefix();
 }
