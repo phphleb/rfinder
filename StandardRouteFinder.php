@@ -20,6 +20,9 @@ class StandardRouteFinder implements RouteFinderInterface
 
     private $prefix = null;
 
+    private $name = null;
+
+
     /**
      * @param string $url - validated url like `/example/url/address/`
      * @param string|null $method - request method, for example `GET`
@@ -51,7 +54,7 @@ class StandardRouteFinder implements RouteFinderInterface
             return $this;
         }
 
-        $this->currentLabel = $block['number'] ?? null;
+        $this->currentLabel = $block['number'] ? (int)$block['number'] - 1000 : null;
         $this->currentPath = $this->getFullPath($block);
 
         $this->checked = true;
@@ -100,8 +103,21 @@ class StandardRouteFinder implements RouteFinderInterface
         return $this->prefix;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
     protected function getFullPath(array $block) {
-        $prefix = '';
+        $prefix = '/';
+        foreach($block['actions'] ?? [] as $action) {
+            if (isset($action['name'])) {
+                $this->name = $action['name'];
+            }
+        }
         foreach($block['actions'] as $action) {
             if(!empty($action['prefix'])) {
                 $prefix .= trim($action['prefix'], ' /\\') . '/';
@@ -110,7 +126,7 @@ class StandardRouteFinder implements RouteFinderInterface
 
         $this->prefix = trim($prefix, ' /\\');
 
-        return '/' . str_replace('//', '/', $prefix . trim($block['data_path'], ' /\\') . '/');
+        return str_replace('//', '/', $prefix . trim($block['data_path'], ' /\\') . '/');
     }
 
 }

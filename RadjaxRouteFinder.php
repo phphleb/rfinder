@@ -22,13 +22,9 @@ class RadjaxRouteFinder implements RouteFinderInterface
      * @param string $url - проверяемый URL вида `/example/url/address/`
      */
     public function __construct(string $url) {
-        $file = defined('HLEB_RADJAX_PATHS_TO_ROUTE_PATHS') ? HLEB_RADJAX_PATHS_TO_ROUTE_PATHS : HLEB_LOAD_ROUTES_DIRECTORY . '/radjax.php';
-        if (!file_exists($file)) {
-            $this->checked = false;
-            return $this;
-        }
+        $files = defined('HLEB_RADJAX_PATHS_TO_ROUTE_PATHS') ? HLEB_RADJAX_PATHS_TO_ROUTE_PATHS : [HLEB_LOAD_ROUTES_DIRECTORY . '/radjax.php'];
         try {
-            $app = new App($file);
+            $app = new App($files);
             $isFound = $app->searchRoute($url);
             if (!$isFound){
                 $this->checked = false;

@@ -4,6 +4,8 @@
 namespace Phphleb\Rfinder;
 
 
+use Exception;
+
 class RouteFinder
 {
     private $route = null;
@@ -20,10 +22,15 @@ class RouteFinder
 
     private $label = 0;
 
+    private $errors = [];
+
+    private $name = null;
+
     /**
      * @param string $url - search url.
      * @param string $method - request method.
      * @param string|null $domain
+     * @throws Exception
      */
     public function __construct(string $url, string $method = 'GET', string $domain = null)
     {
@@ -31,18 +38,20 @@ class RouteFinder
         $this->domain = $domain;
         $finder = (new RadjaxRouteFinder($url));
         $this->isFound = $finder->isFound();
-        if ($this->isFound) {
+        if ($this->isFound && !$finder->getErrors()) {
             // Found a match in the Radjax routes.
             $this->setRouteData($finder);
             $this->isRadjax = true;
             return $this;
 
         }
+        $this->errors = $finder->getErrors();
         $finder =  (new StandardRouteFinder($url, $method, $domain));
         $this->isFound = $finder->isFound();
-        if ($this->isFound) {
+        if ($this->isFound && !$finder->getErrors()) {
             // Found a match in the standard routes.
             $this->setRouteData($finder);
+            $this->name = $finder->getName();
             return $this;
         }
     }
@@ -127,15 +136,33 @@ class RouteFinder
      * @return string
      */
     public function getInfo() {
-        if ($this->isFound()) {
+        if ($this->getErrors()) {
+            return implode(PHP_EOL, $this->getErrors());
+        }
+        if (!$this->isFound()) {
             return "Route not found";
         }
         if ($this->isRadjax()) {
             return "RADJAX ROUTE: №{$this->label} $this->route";
         }
 
-        return "ROUTE: #{$this->label} $this->route" . ($this->domain ? "domain: $this->domain" : "") . ($this->prefix ? "prefix: {$this->prefix}" : "");
+        return "ROUTE: #{$this->label} $this->route {$this->method} " . ($this->domain ? PHP_EOL . "domain: $this->domain" : "") . ($this->prefix ? PHP_EOL . "prefix: {$this->prefix}" : "") . ($this->name ? PHP_EOL . "route name: {$this->name}" : "");
 
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrors() {
+        return $this->errors;
     }
 
     private function setRouteData(RouteFinderInterface $finder)
@@ -143,6 +170,7 @@ class RouteFinder
         $this->route = $finder->getRoutePath();
         $this->prefix = $finder->getPrefix();
         $this->label = $finder->getRouteLabel();
+        $this->errors = array_merge($this->errors, $finder->getErrors());
         $this->isFound = true;
     }
 
