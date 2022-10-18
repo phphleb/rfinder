@@ -34,6 +34,13 @@ class StandardRouteFinder implements RouteFinderInterface
      */
     public function __construct(string $url, string $method = 'GET', string $domain = null) {
         $url = $url[0] === '/' ? $url : '/' . $url;
+        if (strlen($url) > 1 && defined('HLEB_PROJECT_ENDING_URL') && defined('HLEB_ENDING_URL_INCLUDING_METHODS') && in_array(strtolower($method), HLEB_ENDING_URL_INCLUDING_METHODS)) {
+            if ((HLEB_PROJECT_ENDING_URL && $url[strlen($url) - 1] !== '/') || (!HLEB_PROJECT_ENDING_URL && $url[strlen($url) - 1] === '/')) {
+                $this->errors[] = 'URL slash ending (`/`) in `HLEB_PROJECT_ENDING_URL` constant does not match. Try again ' . (HLEB_PROJECT_ENDING_URL ? $url . '/' : rtrim($url, '/'));
+                $this->checked = false;
+                return $this;
+            }
+        }
         try {
             $routesList = (new CacheRoutes())->load();
             if (empty($routesList)) {
